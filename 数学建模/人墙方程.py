@@ -1,28 +1,18 @@
-from numpy import tan,cos,sin,pi,sqrt, deg2rad, rad2deg
+from numpy import *
 from scipy.optimize import fsolve
-import pandas as pd
-
-#定义方程
-# D = 9.15
-# h1 = 1.8
-# h2 = 0.4
-# v0 = 25
-# g = 9.8
-def equation(theta, D, h1, h2, v0, g):
-    return (D*tan(theta)) - (g*D*D*(tan(theta)*tan(theta) + 1) / (2*v0*v0)) - (h1+h2)
-
-# 求解方程，初始值为0
-initial_guess = deg2rad(89)
-
-# 其他参数：
-D = 9.15
+# 参数：
+L = 9.15
 h1 = 1.8
 h2 = 0.4
 v0 = 25
 g = 9.8
-
-solution = fsolve(equation, initial_guess, args=(D, h1, h2, v0, g))
-theta_degrees1 = rad2deg(solution[0])
+# 定义方程
+def f(theta):
+    return (L*tan(theta)) - (g*L*L*(tan(theta)*tan(theta) + 1) / (2*v0*v0)) - h1-h2
+# 求解方程初始猜测值
+initial_guess = [deg2rad(0), deg2rad(89)]
+# 调用fsolve函数求解方程
+solution = fsolve(f, initial_guess)
 print("solution:", solution)
-print("theta值(角度):", theta_degrees1)
-print("tan(theta):", tan(solution[0]))
+print(f"theta值1(弧度):{solution[0]}, (角度):{rad2deg(solution[0])}")
+print(f"theta值2(弧度):{solution[1]}, (角度):{rad2deg(solution[1])}")
