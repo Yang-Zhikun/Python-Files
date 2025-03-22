@@ -37,13 +37,13 @@ print("人墙方程 solution:", solution_f)
 print(f"人墙方程 theta值(弧度):{solution_f}, (角度):{rad2deg(solution_f)}")
 
 # 求解远角公式
-initial_guess_f2 = [0.30924550686490665, 1.4975091091322803]
+initial_guess_f2 = solution_f
 solution_f2 = fsolve(f2, initial_guess_f2)
 print("远角公式 solution:", solution_f2)
 print(f"远角公式 theta(弧度):{solution_f2}, (角度):{rad2deg(solution_f2)}")
 
 # 求解近角公式
-initial_guess_f1 = [0.30924550686490665, 1.4975091091322803]
+initial_guess_f1 = solution_f
 solution_f1 = fsolve(f1, initial_guess_f1)
 print("近角公式 solution:", solution_f1)
 print(f"近角公式 theta(弧度):{solution_f1}, (角度):{rad2deg(solution_f1)}")
