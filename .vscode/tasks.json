@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+    "tasks": [
+		{
+			"type":"shell",
+			"label": "在终端运行当前python文件",
+			"command": "D:\\Program Files(Dx86)\\Python3.12.4\\python.exe",
+			"args": [
+				"${file}"
+			]
+		}		
+	]
+}
