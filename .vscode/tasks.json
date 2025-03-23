@@ -7,7 +7,7 @@
 			"command": "D:\\Program Files(Dx86)\\Python3.12.4\\python.exe",
 			"args": [
 				"${file}"
-			]
+			],
 		}		
 	]
 }
