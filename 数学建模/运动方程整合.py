@@ -6,7 +6,7 @@ W = 7.32
 H = 2.44
 W0 = 16.5
 L0 = 40.32
-d = 23
+d = 35
 alpha = deg2rad(40)  # 将角度转换为弧度
 g = 9.8
 v0 = 25
@@ -91,6 +91,9 @@ def f3_alpha(alpha):
     return sin(alpha) - W0 / d
 initial_guess_alpha = deg2rad(40)  # 初始猜测值，弧度
 alpha_min = fsolve(f3_alpha, initial_guess_alpha)[0]
+# 限制alpha_min不小于39.29869155°
+if alpha_min < deg2rad(39.29869155):
+    alpha_min = deg2rad(39.29869155)
 print(f"alpha_min(弧度):{alpha_min}, (角度):{rad2deg(alpha_min)}")
 
 # 改变alpha值并求解
@@ -119,3 +122,7 @@ plt.title(f'theta值与alpha的关系(d={d})')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+# 根据图像输出极值点
+print(f"远角公式 theta_max(角度):{max(f2_solutions)}, (弧度):{deg2rad(max(f2_solutions))}")
+print(f"近角公式 theta_max(角度):{max(f1_solutions)}, (弧度):{deg2rad(max(f1_solutions))}")
