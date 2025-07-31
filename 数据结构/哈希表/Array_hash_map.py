@@ -12,7 +12,7 @@ class Array_hash_map:
 
         self.data: list[Pair | None] = [None] * length
 
-    def hash_func(self, key: int):
+    def hash_func(self, key: int) -> int:
         """哈希函数, 取余法"""
         return int(key) % self.length
     
@@ -29,6 +29,18 @@ class Array_hash_map:
             return self.data[index].val
         else:
             return None
+    
+    def removeByKey(self, key: int):
+        """通过键进行删除"""
+        index: int = self.hash_func(key)
+        self.data[index] = None
+    
+    def removeByVal(self, val):
+        """通过值进行删除"""
+        for data in self.data:
+            if data != None and data.val == val:
+                data = None
+                return
 
     def printList(self):
         """打印哈希表"""
@@ -57,4 +69,14 @@ if __name__ == "__main__":
     print("查询：123350->", hash.get(123350))
     print("查询：123213->", hash.get(123213))
     print("查询：23456 ->", hash.get(23456))
+
+    print()
+    hash.removeByKey(23456)
+    print("删除key=23456后的哈希表: ")
+    hash.printList()
+
+    print()
+    hash.removeByVal("name2")
+    print("删除val=name2后的哈希表: ")
+    hash.printList()
     
