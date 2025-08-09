@@ -9,7 +9,7 @@ class Array_hash_map:
     def __init__(self, length: int = 101):
         """构造一个长度为length的数组"""
         self.length: int = length
-
+        
         self.data: list[Pair | None] = [None] * length
 
     def hash_func(self, key: int) -> int:
@@ -34,13 +34,6 @@ class Array_hash_map:
         """通过键进行删除"""
         index: int = self.hash_func(key)
         self.data[index] = None
-    
-    def removeByVal(self, val):
-        """通过值进行删除"""
-        for data in self.data:
-            if data != None and data.val == val:
-                data = None
-                return
 
     def printList(self):
         """打印哈希表"""

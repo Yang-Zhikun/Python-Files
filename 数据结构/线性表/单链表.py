@@ -1,73 +1,74 @@
 # -*- coding: utf-8 -*-
 # 单链表LinkedList
-# 结构说明：
-# 1.每个链表都有一个头节点head，不存放数据，指向链表的第一个节点
+
+class node:
+    """单链表节点"""
+    def __init__(self, data = None, next: 'node' = None) -> None:
+        self.data = data
+        self.next: 'node' = next
+        # next:'node'表示next指向的是一个node类型(node用引号包裹，表示class未定义完，要向前引用)
+
+
 class LinkedList:
-    # 节点类
-    class node:
-        # 节点构造函数
-        # :param value: 节点值
-        # :param next: 指向下一个节点的指针，默认为None
-        def __init__(self, value = None, next = None):
-            self.value = value
-            self.next = next
-        
-    def __init__(self):
-        self.head = self.node()  # 创建一个头节点
-        self.length = 0
+    """
+    单链表
+    结构说明：
+    1.每个链表都有一个头节点head，不存放数据，指向链表的第一个节点
+    """
+    def __init__(self) -> None:
+        self.head = node()
+        self.length = 0 # 链表长度
     
-    # 按位序插入
-    # :param value: 要插入的值
-    # :param index: 插入位置，1表示头节点之后，2表示第二个节点，依此类推
-    def insert(self, value, index):
+    def getLength(self) -> int:
+        """获取链表长度"""
+        return self.length
+    
+    def push_back(self, data) -> None:
+        """在链表尾部添加节点"""
+        self.insert(self.length + 1, data)
+    
+    def push_head(self, data) -> None:
+        """在链表头部添加节点"""
+        self.insert(1, data)
+    
+    def insert(self, index: int, data) -> None:
+        """
+        在链表指定位序 index (从1开始) 处插入节点。
+        self.head 视为 index=0，不存数据
+        """
         if index < 1 or index > self.length + 1:
-            raise IndexError("Linkedlist index out of range") # 索引越界
-        # 找到插入位置的前一个节点
-        p = self.head
-        i = 0 # 从头节点开始计数
-        while i < index - 1:
-            p = p.next
-            i = i + 1
-        # 插入新节点
-        newNode = self.node(value)
-        newNode.next = p.next
-        p.next = newNode
-        self.length += 1
-
-    # 头插法(插入到头节点之后)
-    # :param value: 要插入的值
-
-    def insert_head(self, value):
-        insert(value, 1)  # 调用 insert 方法，将新节点插入到头节点之后
-    
-    # 尾插法
-    # :param value: 要插入的值
-    def insert_tail(self, value):
-        insert(value, self.length + 1)  # 调用 insert 方法，将新节点插入到链表的尾部
-
-    # 删除指定位置的节点
-    # :param index: 要删除的节点位置，1表示头节点之后，2表示第二个节点，依此类推
-    def remove(self, index):
-        if index < 1 or index > self.length:
-            raise IndexError("LinkedList index out of range") # 索引越界
-        # 找到要删除节点的前一个节点
-        p = self.head
+            raise IndexError("Index out of range")
+        # 先定位到index-1
+        cur = self.head # 此时cur的i=0
         i = 0
         while i < index - 1:
-            p = p.next
-            i = i + 1
-        val = p.next.value # 保存要删除节点的值
-        p.next = p.next.next # 删除节点
-        self.length -= 1
-        return val
-        # 注意：Python 的垃圾回收机制会自动处理对象的内存释放，所以不需要手动释放p.next所引用的节点。
+            cur = cur.next
+            i += 1
+        # 插入节点
+        newnode = node(data, cur.next)
+        cur.next = newnode
+        self.length += 1
     
-    # 删除头节点之后的第一个节点
-    def pop_head(self):
-        remove(1)  # 调用 remove 方法，删除头节点之后的第一个节点
-
-    # 删除尾节点
-    def pop_tail(self):
-        remove(self.length)  # 调用 remove 方法，删除链表的尾节点
+    def printList(self) -> None:
+        """打印链表"""
+        cur = self.head.next
+        while cur != None:
+            print(cur.data)
+            cur = cur.next
+        print()
         
-    
+
+
+
+
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.push_back("hey")
+    ll.push_back(1)
+    ll.push_back(66.66)
+    ll.push_back("world")
+    ll.push_back("你好")
+    ll.push_head("头部插入")
+    print("链表长度：", ll.getLength())
+    print("链表内容：")
+    ll.printList()
