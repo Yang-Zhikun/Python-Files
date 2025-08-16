@@ -49,6 +49,36 @@ class LinkedList:
         cur.next = newnode
         self.length += 1
     
+    def delete(self, index: int):
+        """
+        删除链表指定位序 index (从1开始) 的节点，并返回该节点的数据
+        self.head 视为 index=0，不存数据
+        """
+        if index < 1 or index > self.length:
+            raise IndexError("Index out of range")
+        # 先找到第 index - 1 个节点
+        cur = self.head
+        i = 0
+        while i < index - 1:
+            cur = cur.next
+            i += 1
+        ret = cur.next.data # 保存数据
+        # 删除节点
+        cur.next = cur.next.next
+        self.length -= 1
+        return ret
+
+    def get(self, index: int):
+        """获取链表指定位序index(从1开始)的节点数据"""
+        if index < 1 or index > self.length:
+            raise IndexError("Index out of range")
+        cur = self.head
+        i = 0
+        while i < index:
+            cur = cur.next
+            i += 1
+        return cur.data
+
     def printList(self) -> None:
         """打印链表"""
         cur = self.head.next
@@ -68,7 +98,25 @@ if __name__ == "__main__":
     ll.push_back(66.66)
     ll.push_back("world")
     ll.push_back("你好")
-    ll.push_head("头部插入")
+    ll.push_head("hh头部插入")
     print("链表长度：", ll.getLength())
     print("链表内容：")
     ll.printList()
+
+    print("获取第6个节点数据：", ll.get(6))
+    print("链表长度：", ll.getLength())
+    ll.printList()
+    print("删除第3个节点：", ll.delete(3))
+    print("链表长度：", ll.getLength())
+    ll.printList()
+    print("删除第3个节点：", ll.delete(3))
+    print("链表长度：", ll.getLength())
+    ll.printList()
+    print("删除第3个节点：", ll.delete(3))
+    print("链表长度：", ll.getLength())
+    ll.printList()
+    print("删除第3个节点：", ll.delete(3))
+    print("链表长度：", ll.getLength())
+    ll.printList()
+    
+    
