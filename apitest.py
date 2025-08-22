@@ -23,3 +23,4 @@ if image_response.status_code == 200:
         print(f"图片已保存为: {filename}")
 else:
     print(f"图片下载失败，状态码: {image_response.status_code}")
+    print("请检查网络连接或API服务是否正常。")
