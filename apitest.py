@@ -1,21 +1,17 @@
 import requests
-import json
-from datetime import datetime
-
+import datetime
 url = "https://60s.viki.moe/v2/bing?encoding=json"
 
 # 发送API请求
 response = requests.get(url)
-data = response.json()  # 解析JSON响应
+jsonData = response.json()  # 解析JSON响应
+print(jsonData)
 
 # 提取图片URL和版权信息
-image_url = data["data"]["cover"]
-#copyright = data["data"]["copyright"]
+image_url = jsonData["data"]["cover"]
 
-# 生成文件名（使用日期和版权信息）
-raw_date = data["data"]["update_date"]  # "2025/08/18"
-date_str = raw_date.replace("/", "")
-#clean_copyright = "".join(x for x in copyright if x.isalnum() or x in " -_")[:30]  # 清理特殊字符
+# 生成文件名,使用当前日期
+date_str = datetime.datetime.now().strftime("%Y-%m-%d")
 filename = f"{date_str}.jpg"
 
 # 下载图片
