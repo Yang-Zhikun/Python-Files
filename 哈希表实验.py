@@ -24,6 +24,4 @@ hash.remove(23456)
 print("删除key=23456后的哈希表: ")
 hash.printHashMap()
 
-
-print("这是本地的更改")
-print("这也是本地的更改")
+print("都不要了")
