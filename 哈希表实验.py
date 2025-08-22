@@ -23,5 +23,3 @@ print("删除key=23456")
 hash.remove(23456)
 print("删除key=23456后的哈希表: ")
 hash.printHashMap()
-
-print("都不要了")
