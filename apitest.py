@@ -1,7 +1,6 @@
 import requests
 import datetime
 url = "https://60s.viki.moe/v2/bing?encoding=json"
-print(f"请求URL: {url}")
 
 # 发送API请求
 response = requests.get(url)
