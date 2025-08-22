@@ -1,6 +1,9 @@
 """
 基于数组实现的哈希表
 使用链式地址法解决冲突
+说明：利用list的列表作为链表，存储键值对
+    哈希函数优化：混合高位与低位，减少冲突
+    当负载因子超过设定值时，自动扩容
 """
 """键值对"""
 class Pair:
@@ -12,18 +15,17 @@ class Array_hash_map:
     def __init__(self, capability: int = 2, resizeFactor: float = 0.75, resizeRatio: int = 2):
         """构造一个长度为capability的数组, resizeFactor为负载因子, 大于它时进行扩容; resizeRatio为扩容倍数"""
         self.capability: int = capability # 哈希表的容量
-
-
         # 简化类型注解：桶数组是“列表的列表”，每个桶存储 Pair 对象
-        self.buckets: list[list[Pair]] = [[] for _ in range(capability)]
+        self.buckets: list[list[Pair | None] | None] = [[] for _ in range(capability)]
         self.size: int = 0 # 哈希表当前键值对的数量
         self.resizeFactor: float = resizeFactor # 负载因子，超过该值时需要扩容
         self.resizeRatio: int = resizeRatio # 扩容倍数
         
 
     def hash_func(self, key: int) -> int:
-        """哈希函数, 取余法"""
-        return int(key) % self.capability
+        """优化哈希函数：混合高位与低位，减少冲突"""
+        # 先将 key 右移 16 位（混合高位），再与原 key 异或，最后取模
+        return (key ^ (key >> 16)) % self.capability
     
     def loadFactor(self) -> float:
         """计算负载因子"""
@@ -33,7 +35,7 @@ class Array_hash_map:
         """扩容：直接迁移键值对，避免冗余的 put 调用"""
         old_buckets = self.buckets
         self.capability *= self.resizeRatio
-        self.buckets = [[] for _ in range(self.capability)]  # 新桶数组
+        self.buckets: list[list[Pair | None] | None] = [[] for _ in range(self.capability)] # 新桶数组
         self.size = 0  # 重置 size，后续直接累加  
         for bucket in old_buckets:
             for pair in bucket:
