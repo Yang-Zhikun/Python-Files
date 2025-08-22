@@ -1,0 +1,25 @@
+import 数据结构.哈希表.Array_hash_map as Array_hash_map
+hash = Array_hash_map.Array_hash_map()
+
+print("哈希表容量：", hash.capability)
+hash.put(123456, "name1")
+hash.put(123350, "name2")
+hash.put(23456, "name3")
+hash.put(4, "name4")
+hash.put(5, "name5")
+hash.put(6, "name6")
+print("哈希表容量：", hash.capability)
+
+
+print("哈希表容量：", hash.capability)
+hash.printHashMap()
+print()
+print("查询：123456->", hash.get(123456))
+print("查询：123350->", hash.get(123350))
+print("查询：123213->", hash.get(123213))
+print("查询：23456 ->", hash.get(23456))
+print()
+print("删除key=23456")
+hash.remove(23456)
+print("删除key=23456后的哈希表: ")
+hash.printHashMap()
