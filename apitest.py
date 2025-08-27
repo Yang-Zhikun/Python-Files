@@ -11,7 +11,7 @@ print(jsonData)
 image_url = jsonData["data"]["cover"]
 
 # 生成文件名,使用当前日期
-date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+date_str = datetime.datetime.now().strftime("%Y%m%d")
 filename = f"{date_str}.jpg"
 
 # 下载图片
